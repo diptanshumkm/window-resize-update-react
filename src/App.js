@@ -1,23 +1,29 @@
-import logo from './logo.svg';
+
 import './App.css';
+import { useEffect, useState } from 'react';
 
 function App() {
+  
+  const [width, setWidth] = useState(window.innerWidth)
+
+  function updateSize(){
+    setWidth(width)
+  }
+
+  useEffect( () => {
+    // add eventlistener when the component mounts
+    window.addEventListener('resize', updateSize);
+
+    return () => {
+      // remove eventlistener when the component unmount
+      // window.removeEventListener('resize', updateSize);
+    }
+
+  }, [] )
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      Window width : {width}
     </div>
   );
 }
